@@ -162,6 +162,52 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .port-grid .pv{font-family:'Anton',sans-serif;font-size:1rem;color:var(--PO)}
 .port-grid .pl{font-size:.6rem;color:var(--gr);text-transform:uppercase;margin-top:2px}
 
+/* DAY NAVIGATION */
+.day-nav{display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:14px;padding:10px 14px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.day-nav-btn{background:none;border:none;color:var(--gr);cursor:pointer;font-size:1.2rem;padding:4px 10px;border-radius:8px;transition:background .15s;font-family:'Anton',sans-serif}
+.day-nav-btn:hover{background:var(--CR)}
+.day-nav-center{text-align:center;flex:1}
+.day-nav-label{font-family:'Anton',sans-serif;font-size:.95rem;color:var(--N);letter-spacing:.5px}
+.day-nav-sub{font-size:.65rem;color:var(--gr);margin-top:1px;letter-spacing:.5px}
+.day-nav-today{display:inline-block;background:rgba(245,197,24,.18);color:#7A5C00;font-size:.6rem;font-weight:700;padding:1px 7px;border-radius:99px;margin-top:3px;font-family:'Anton',sans-serif}
+
+/* STREAK */
+.streak-badge{display:flex;align-items:center;gap:6px;background:rgba(245,197,24,.12);border-radius:12px;padding:8px 14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.streak-fire{font-size:1.4rem;line-height:1}
+.streak-count{font-family:'Anton',sans-serif;font-size:1.6rem;color:var(--N);line-height:1}
+.streak-label{font-size:.68rem;color:var(--gr);line-height:1.3;letter-spacing:.3px}
+.streak-closed{background:rgba(125,84,144,.12)}
+.streak-closed .streak-count{color:var(--PO)}
+
+/* CLOSE DAY BUTTON */
+.close-day-wrap{padding:6px 0 10px;display:flex;justify-content:center}
+.close-day-btn{background:var(--N);color:var(--Y);border:none;border-radius:14px;padding:14px 32px;font-family:'Anton',sans-serif;font-size:.95rem;letter-spacing:1.5px;cursor:pointer;width:100%;transition:opacity .2s;text-transform:uppercase}
+.close-day-btn:hover{opacity:.85}
+.close-day-btn.closed{background:var(--CR);color:var(--PO);border:2px solid var(--PO)}
+
+/* MACRO DETAIL MODAL */
+.macro-modal{display:none;position:fixed;inset:0;z-index:200;flex-direction:column;background:var(--CR)}
+.macro-modal.show{display:flex}
+.macro-modal-hd{background:var(--N);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--Y);flex-shrink:0}
+.macro-modal-title{font-family:'Anton',sans-serif;font-size:1rem;color:var(--Y);letter-spacing:2px;flex:1;text-transform:uppercase}
+.macro-modal-close{background:rgba(255,255,255,.1);border:none;color:#fff;width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:1rem;flex-shrink:0}
+.macro-modal-body{flex:1;overflow-y:auto;padding:16px}
+.mm-ring-row{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:18px;padding:18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mm-ring-stats{flex:1}
+.mm-stat-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
+.mm-stat-lbl{font-size:.8rem;color:var(--gr)}
+.mm-stat-val{font-family:'Anton',sans-serif;font-size:.85rem;color:var(--N)}
+.mm-macro-card{background:var(--card);border-radius:18px;padding:16px 18px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.mm-macro-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.mm-macro-name{font-family:'Anton',sans-serif;font-size:.9rem;letter-spacing:.5px}
+.mm-macro-vals{font-size:.78rem;color:var(--gr)}
+.mm-macro-vals b{color:var(--N);font-family:'Anton',sans-serif;font-size:.95rem}
+.mm-macro-pct{font-size:.68rem;color:var(--gr);margin-top:6px}
+.mm-meal-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--brd);font-size:.83rem}
+.mm-meal-row:last-child{border-bottom:none}
+.mm-meal-name{color:var(--N);font-family:'Anton',sans-serif;font-size:.78rem;letter-spacing:.3px}
+.mm-meal-val{color:var(--gr)}
+
 /* MISC */
 .empty{text-align:center;padding:28px 0;color:var(--gr)}
 .empty-icon{font-size:2.5rem;margin-bottom:8px}
@@ -294,6 +340,26 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
   <div id="midia-noplan" class="card" style="display:none">
     <div class="empty"><p>Pide a tu nutricionista<br>que genere el plan primero.</p></div>
   </div>
+  <!-- DAY NAVIGATION -->
+  <div class="day-nav" id="day-nav-bar">
+    <button class="day-nav-btn" onclick="navDay(-1)">&#8249;</button>
+    <div class="day-nav-center">
+      <div class="day-nav-label" id="day-nav-label">HOY</div>
+      <div class="day-nav-sub" id="day-nav-sub"></div>
+      <div id="day-nav-today-tag"></div>
+    </div>
+    <button class="day-nav-btn" onclick="navDay(1)">&#8250;</button>
+  </div>
+
+  <!-- STREAK -->
+  <div class="streak-badge" id="streak-badge">
+    <div class="streak-fire" id="streak-fire">&#128293;</div>
+    <div>
+      <div class="streak-count" id="streak-count">0</div>
+      <div class="streak-label">días seguidos<br><span id="streak-sub">Cierra el día para empezar</span></div>
+    </div>
+  </div>
+
   <div id="midia-wrap">
     <!-- Budget card -->
     <div class="card" style="padding:18px 20px">
@@ -322,13 +388,14 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
           <div class="budget-stat-lbl">Meta</div>
         </div>
       </div>
-      <!-- Macro dots + segmented bar -->
-      <div class="macro-dots">
+      <!-- Macro dots + segmented bar (clickable) -->
+      <div class="macro-dots" onclick="abrirMacroModal()" style="cursor:pointer">
         <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--AM)"></div><span id="md-dot-f">—% Grasas</span></div>
         <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--PO)"></div><span id="md-dot-c">—% Carbos</span></div>
         <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--P)"></div><span id="md-dot-p">—% Prot</span></div>
+        <div class="macro-dot" style="color:var(--PO);font-size:.7rem">&#8250; ver detalle</div>
       </div>
-      <div class="macro-seg-bar" id="md-segbar">
+      <div class="macro-seg-bar" id="md-segbar" onclick="abrirMacroModal()" style="cursor:pointer">
         <div class="macro-seg-f" id="md-seg-f" style="width:33%"></div>
         <div class="macro-seg-c" id="md-seg-c" style="width:33%"></div>
         <div class="macro-seg-p" id="md-seg-p" style="width:34%"></div>
@@ -336,7 +403,21 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
     </div>
     <div class="alerta" id="midia-alerta">¡Superaste tu meta calórica del día!</div>
     <div id="midia-meals"></div>
+    <!-- CLOSE DAY -->
+    <div class="close-day-wrap" id="close-day-wrap">
+      <button class="close-day-btn" id="close-day-btn" onclick="cerrarDia()">CERRAR EL DÍA DE HOY</button>
+    </div>
   </div>
+</div>
+
+<!-- MACRO DETAIL MODAL -->
+<div class="macro-modal" id="macro-modal">
+  <div class="macro-modal-hd">
+    <div class="macro-modal-title">MIS MACROS</div>
+    <div id="macro-modal-date" style="font-size:.72rem;color:var(--P);font-family:'Anton',sans-serif;letter-spacing:1px;margin-right:8px"></div>
+    <button class="macro-modal-close" onclick="cerrarMacroModal()">&#x2715;</button>
+  </div>
+  <div class="macro-modal-body" id="macro-modal-body"></div>
 </div>
 
 <!-- ====== RESUMEN ====== -->
@@ -561,11 +642,24 @@ let CA=null;     // clienteActual
 let PDIA=0;      // planDiaIdx
 let SCTX=null;   // searchContext {ctx:'plan'|'midia', meal}
 let SFOOD=null;  // selectedFood
+let CDATE=null;  // currentDate being viewed in Mi Día (null = hoy)
 
 /* ============================================================
    HELPERS
 ============================================================ */
 const hoy=()=>new Date().toISOString().split('T')[0];
+function addDays(dateStr,n){const d=new Date(dateStr+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().split('T')[0];}
+function gStreak(){return(gd().streak||{})[CA]||{count:0,lastClosed:null,closedDates:[]}}
+function sStreak(s){const d=gd();if(!d.streak)d.streak={};d.streak[CA]=s;sd(d)}
+function getDiasLabel(dateStr){
+  const t=hoy(),y=addDays(t,-1),m=addDays(t,1);
+  const dias=['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
+  const d=new Date(dateStr+'T12:00:00');
+  if(dateStr===t)return{label:'HOY',sub:dias[d.getDay()]+' '+dateStr.slice(8)+'/'+dateStr.slice(5,7),isToday:true};
+  if(dateStr===y)return{label:'AYER',sub:dias[d.getDay()]+' '+dateStr.slice(8)+'/'+dateStr.slice(5,7),isToday:false};
+  if(dateStr===m)return{label:'MAÑANA',sub:dias[d.getDay()]+' '+dateStr.slice(8)+'/'+dateStr.slice(5,7),isToday:false};
+  return{label:dias[d.getDay()]+' '+dateStr.slice(8)+'/'+dateStr.slice(5,7),sub:'',isToday:false};
+}
 const r1=n=>Math.round(n*10)/10;
 const r0=n=>Math.round(n);
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -800,8 +894,8 @@ function delPlan(meal,idx){
 /* ============================================================
    MI DÍA
 ============================================================ */
-function initTrackingHoy(){
-  const fecha=hoy(),tr=gTracking();
+function initTrackingFecha(fecha){
+  const tr=gTracking();
   if(!tr[CA])tr[CA]={};
   if(!tr[CA][fecha]){
     const pl=gPlanes()[CA],di=pl&&pl[diaIdx(fecha)];
@@ -813,18 +907,82 @@ function initTrackingHoy(){
   }
   return tr[CA][fecha];
 }
-function getTrackingHoy(){return(gTracking()[CA]||{})[hoy()]||{desayuno:[],media_m:[],almuerzo:[],merienda:[],cena:[]};}
-function saveTrackingHoy(data){const tr=gTracking();if(!tr[CA])tr[CA]={};tr[CA][hoy()]=data;sTracking(tr);}
+function initTrackingHoy(){return initTrackingFecha(hoy());}
+function getTrackingFecha(fecha){return(gTracking()[CA]||{})[fecha]||{desayuno:[],media_m:[],almuerzo:[],merienda:[],cena:[]};}
+function getTrackingHoy(){return getTrackingFecha(hoy());}
+function saveTrackingFecha(fecha,data){const tr=gTracking();if(!tr[CA])tr[CA]={};tr[CA][fecha]=data;sTracking(tr);}
+function saveTrackingHoy(data){saveTrackingFecha(hoy(),data);}
+function getCDATE(){return CDATE||hoy();}
 
 function renderMiDia(){
+  if(!CDATE)CDATE=hoy();
   const c=CA&&gClientes()[CA];
   if(!c?.macros){document.getElementById('midia-noplan').style.display='block';document.getElementById('midia-wrap').style.display='none';return;}
   const pl=gPlanes()[CA];
-  if(!pl||!pl[diaIdx(hoy())]){document.getElementById('midia-noplan').style.display='block';document.getElementById('midia-wrap').style.display='none';return;}
+  if(!pl){document.getElementById('midia-noplan').style.display='block';document.getElementById('midia-wrap').style.display='none';return;}
   document.getElementById('midia-noplan').style.display='none';document.getElementById('midia-wrap').style.display='block';
-  const _h=hoy();document.getElementById('midia-dia-str').textContent=DIAS[diaIdx(_h)].toUpperCase()+', '+_h.slice(8)+'/'+_h.slice(5,7);
-  const data=initTrackingHoy();
+  // Day nav
+  const info=getDiasLabel(CDATE);
+  document.getElementById('day-nav-label').textContent=info.label;
+  document.getElementById('day-nav-sub').textContent=info.sub;
+  document.getElementById('day-nav-today-tag').innerHTML=info.isToday?'<span class="day-nav-today">HOY</span>':'';
+  // Streak
+  renderStreak();
+  // Close day button
+  const cdBtn=document.getElementById('close-day-btn');
+  const cdWrap=document.getElementById('close-day-wrap');
+  const streak=gStreak();
+  const isToday=CDATE===hoy();
+  cdWrap.style.display=isToday?'flex':'none';
+  const isClosed=streak.closedDates&&streak.closedDates.includes(CDATE);
+  if(cdBtn){cdBtn.textContent=isClosed?'DÍA CERRADO':'CERRAR EL DÍA DE HOY';cdBtn.className='close-day-btn'+(isClosed?' closed':'');}
+  const data=initTrackingFecha(CDATE);
   renderMiDiaUI(data,c.macros);
+}
+function renderStreak(){
+  const s=gStreak();
+  const el=id=>document.getElementById(id);
+  const streak=calcStreakCount();
+  if(el('streak-count'))el('streak-count').textContent=streak;
+  if(el('streak-fire'))el('streak-fire').textContent=streak>0?'🔥':'○';
+  const lastClosed=s.lastClosed;
+  const isClosedToday=s.closedDates&&s.closedDates.includes(hoy());
+  if(el('streak-sub')){
+    if(streak===0)el('streak-sub').textContent='Cierra el día para empezar';
+    else if(isClosedToday)el('streak-sub').textContent='¡Sigue así, Tragón!';
+    else el('streak-sub').textContent='Cierra hoy para mantener tu racha';
+  }
+  if(el('streak-badge')){
+    el('streak-badge').className='streak-badge'+(isClosedToday?' streak-closed':'');
+  }
+}
+function calcStreakCount(){
+  const s=gStreak();
+  if(!s.closedDates||!s.closedDates.length)return 0;
+  const closed=new Set(s.closedDates);
+  let count=0,d=hoy();
+  // if today isn't closed, start counting from yesterday
+  if(!closed.has(d))d=addDays(d,-1);
+  while(closed.has(d)){count++;d=addDays(d,-1);}
+  return count;
+}
+function navDay(offset){
+  if(!CDATE)CDATE=hoy();
+  CDATE=addDays(CDATE,offset);
+  renderMiDia();
+}
+function cerrarDia(){
+  const fecha=CDATE||hoy();
+  if(fecha!==hoy())return;
+  const s=gStreak();
+  if(!s.closedDates)s.closedDates=[];
+  if(!s.closedDates.includes(fecha)){
+    s.closedDates.push(fecha);
+    s.lastClosed=fecha;
+    s.count=calcStreakCount();
+    sStreak(s);
+  }
+  renderMiDia();
 }
 function renderMiDiaUI(data,mac){
   const tot=sumDay(data,true);
@@ -887,12 +1045,83 @@ function rowMiDia(meal,i,it){
   </div>`;
 }
 function toggleChk(meal,idx){
-  const data=getTrackingHoy();data[meal][idx].checked=!data[meal][idx].checked;saveTrackingHoy(data);
+  const fecha=getCDATE();const data=getTrackingFecha(fecha);
+  data[meal][idx].checked=!data[meal][idx].checked;saveTrackingFecha(fecha,data);
   renderMiDiaUI(data,gClientes()[CA].macros);
 }
 function delTracking(meal,idx){
-  const data=getTrackingHoy();data[meal].splice(idx,1);saveTrackingHoy(data);
+  const fecha=getCDATE();const data=getTrackingFecha(fecha);
+  data[meal].splice(idx,1);saveTrackingFecha(fecha,data);
   renderMiDiaUI(data,gClientes()[CA].macros);
+}
+
+/* ============================================================
+   MACRO DETAIL MODAL
+============================================================ */
+function abrirMacroModal(){
+  const c=CA&&gClientes()[CA];if(!c?.macros)return;
+  const fecha=getCDATE();
+  const data=getTrackingFecha(fecha);
+  const mac=c.macros;const tot=sumDay(data,true);
+  const info=getDiasLabel(fecha);
+  document.getElementById('macro-modal-date').textContent=info.label+(info.sub?' · '+info.sub:'');
+  // ring data
+  const pct=mac.k>0?Math.min(tot.k/mac.k*100,100).toFixed(0):0;
+  const remaining=mac.k-r0(tot.k);
+  // per-meal breakdown for each macro
+  const mealTots={};MEALS.forEach(m=>{mealTots[m]=sum(data[m]||[],true);});
+  // macro % of total kcal
+  const totK=tot.k||1;
+  const pctFkcal=r0(tot.f*9/totK*100);
+  const pctCkcal=r0(tot.c*4/totK*100);
+  const pctPkcal=Math.max(0,100-pctFkcal-pctCkcal);
+  // Build HTML
+  let h=`
+  <div class="mm-ring-row">
+    <svg viewBox="0 0 100 100" width="90" height="90" style="flex-shrink:0">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--brd)" stroke-width="8"/>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="${tot.k>mac.k?'var(--AM)':'var(--Y)'}" stroke-width="8"
+        stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="${(263.9*(1-Math.min(tot.k/mac.k,1))).toFixed(1)}"
+        transform="rotate(-90 50 50)"/>
+      <text x="50" y="46" text-anchor="middle" fill="var(--N)" font-family="Anton,sans-serif" font-size="18">${pct}%</text>
+      <text x="50" y="59" text-anchor="middle" fill="var(--gr)" font-size="7.5">de meta</text>
+    </svg>
+    <div class="mm-ring-stats">
+      <div class="mm-stat-row"><span class="mm-stat-lbl">Meta calórica</span><span class="mm-stat-val">${mac.k} kcal</span></div>
+      <div class="mm-stat-row"><span class="mm-stat-lbl">Consumido</span><span class="mm-stat-val">${r0(tot.k)} kcal</span></div>
+      <div class="mm-stat-row"><span class="mm-stat-lbl">${remaining>=0?'Restante':'Excedido'}</span><span class="mm-stat-val" style="color:${remaining<0?'var(--AM)':'var(--PO)'}">${Math.abs(remaining)} kcal</span></div>
+    </div>
+  </div>`;
+  // Each macro card
+  const macros=[
+    {name:'PROTEÍNA',color:'var(--P)',con:tot.p,goal:mac.p,unit:'g',kcal:r0(tot.p*4),pctKcal:pctPkcal},
+    {name:'CARBOHIDRATOS',color:'var(--PO)',con:tot.c,goal:mac.c,unit:'g',kcal:r0(tot.c*4),pctKcal:pctCkcal},
+    {name:'GRASAS',color:'var(--AM)',con:tot.f,goal:mac.f,unit:'g',kcal:r0(tot.f*9),pctKcal:pctFkcal},
+  ];
+  macros.forEach(m=>{
+    const pct2=m.goal>0?Math.min(m.con/m.goal*100,100).toFixed(0):0;
+    const over=m.con>m.goal;
+    h+=`<div class="mm-macro-card">
+      <div class="mm-macro-head">
+        <span class="mm-macro-name" style="color:${m.color}">${m.name}</span>
+        <span class="mm-macro-vals"><b>${r1(m.con)}${m.unit}</b> / ${m.goal}${m.unit}</span>
+      </div>
+      <div class="prog-track" style="height:8px;margin-bottom:6px">
+        <div class="prog-fill" style="width:${pct2}%;background:${m.color};${over?'opacity:.7':''}"></div>
+      </div>
+      <div class="mm-macro-pct">${pct2}% de la meta · ${m.pctKcal}% de las calorías del día · ${m.kcal} kcal</div>
+      <div style="margin-top:10px">`;
+    MEALS.forEach(meal=>{
+      const v=m.name==='PROTEÍNA'?mealTots[meal].p:m.name==='GRASAS'?mealTots[meal].f:mealTots[meal].c;
+      if(v>0)h+=`<div class="mm-meal-row"><span class="mm-meal-name">${MC[meal].L}</span><span class="mm-meal-val">${r1(v)}${m.unit}</span></div>`;
+    });
+    h+='</div></div>';
+  });
+  document.getElementById('macro-modal-body').innerHTML=h;
+  document.getElementById('macro-modal').classList.add('show');
+}
+function cerrarMacroModal(){
+  document.getElementById('macro-modal').classList.remove('show');
 }
 
 /* ============================================================
@@ -962,9 +1191,9 @@ function confirmarAlimento(){
     pl[CA][PDIA][SCTX.meal].push(item);sPlanes(pl);
     cerrarModal();renderPlanDia(PDIA);
   }else{
-    const data=initTrackingHoy();
+    const fecha=getCDATE();const data=initTrackingFecha(fecha);
     data[SCTX.meal].push({...item,checked:true,extra:true});
-    saveTrackingHoy(data);
+    saveTrackingFecha(fecha,data);
     cerrarModal();renderMiDiaUI(data,gClientes()[CA].macros);
   }
 }
@@ -1011,21 +1240,21 @@ function verPlanCompleto(){
   let h=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Plan Nutricional ADT – ${esc(c.nombre)}</title>
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <style>
-    body{font-family:Arial,sans-serif;background:#111;color:#eee;max-width:800px;margin:0 auto;padding:30px}
-    @media print{body{background:#fff;color:#000}th{background:#333!important}button{display:none}}
-    h1{font-family:Anton,sans-serif;color:#F5C518;font-size:2rem;letter-spacing:3px;margin-bottom:4px}
-    h2{font-family:Anton,sans-serif;color:#AC7EB9;font-size:1.2rem;margin:24px 0 10px;letter-spacing:2px;border-bottom:2px solid #333;padding-bottom:6px}
-    h3{font-family:Anton,sans-serif;font-size:.9rem;color:#F5C518;margin:14px 0 6px;letter-spacing:1px}
+    body{font-family:Arial,sans-serif;background:#F5F0E6;color:#1A1A1A;max-width:800px;margin:0 auto;padding:30px}
+    @media print{body{background:#F5F0E6;color:#1A1A1A}button{display:none}}
+    h1{font-family:Anton,sans-serif;color:#1A1A1A;font-size:2rem;letter-spacing:3px;margin-bottom:4px}
+    h2{font-family:Anton,sans-serif;color:#7D5490;font-size:1.2rem;margin:24px 0 10px;letter-spacing:2px;border-bottom:2px solid #DDD5C8;padding-bottom:6px}
+    h3{font-family:Anton,sans-serif;font-size:.9rem;color:#C99800;margin:14px 0 6px;letter-spacing:1px}
     table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:.85rem}
-    th{background:#1C1C1C;color:#F5C518;padding:8px 10px;text-align:left;font-family:Anton,sans-serif;letter-spacing:1px;font-size:.78rem}
-    td{padding:7px 10px;border-bottom:1px solid #222}
-    .ttl td{font-weight:700;color:#F5C518;background:#1A1A1A}
-    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;background:#1C1C1C;border-radius:10px;padding:14px;border:1px solid #333}
-    .meta div{text-align:center}.meta b{display:block;font-family:Anton;font-size:1.5rem;color:#F5C518}.meta span{font-size:.72rem;color:#888;text-transform:uppercase}
+    th{background:#1A1A1A;color:#F5C518;padding:8px 10px;text-align:left;font-family:Anton,sans-serif;letter-spacing:1px;font-size:.78rem}
+    td{padding:7px 10px;border-bottom:1px solid #DDD5C8;color:#1A1A1A}
+    .ttl td{font-weight:700;color:#7D5490;background:#EDE7DC}
+    .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;background:#1A1A1A;border-radius:10px;padding:14px}
+    .meta div{text-align:center}.meta b{display:block;font-family:Anton;font-size:1.5rem;color:#F5C518}.meta span{font-size:.72rem;color:#9A8E85;text-transform:uppercase}
     .btn-p{background:#AC7EB9;color:#fff;border:none;padding:10px 22px;border-radius:8px;font-family:Anton;font-size:.9rem;cursor:pointer;letter-spacing:1px;margin-bottom:20px}
   </style></head><body>
   <h1>ALMA DE TRAGÓN</h1>
-  <p style="color:#888;margin-bottom:14px;font-size:.85rem">Plan Nutricional ADT · ${esc(c.nombre)} · ${new Date().toLocaleDateString('es-ES')}</p>
+  <p style="color:#9A8E85;margin-bottom:14px;font-size:.85rem">Plan Nutricional ADT · ${esc(c.nombre)} · ${new Date().toLocaleDateString('es-ES')}</p>
   <div class="meta">
     <div><b>${c.macros.k}</b><span>kcal/día</span></div>
     <div><b>${c.macros.p}g</b><span>proteína</span></div>
@@ -1066,6 +1295,7 @@ function setBar(barId,txtId,val,meta,unit,cls){
    NAVEGACIÓN
 ============================================================ */
 function showPage(id,btn){
+  if(id==='midia')CDATE=hoy();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
