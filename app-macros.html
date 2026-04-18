@@ -14,13 +14,13 @@
   --warn-bg:#FFFAED;--warn-brd:rgba(201,152,0,.35);--warn-txt:#7A5C00;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Anton',sans-serif;background:var(--CR);color:var(--txt);min-height:100vh}
+body{font-family:'Anton',sans-serif;background:#F0EBE3;color:var(--txt);min-height:100vh}
 
 /* HEADER */
-header{background:#080808;padding:8px 20px;display:flex;align-items:center;border-bottom:2px solid var(--Y);min-height:74px}
+header{background:#080808;padding:6px 18px;display:flex;align-items:center;border-bottom:2px solid var(--Y);min-height:68px}
 
 /* CLIENT BAR */
-.cbar{background:#EDE7DC;padding:9px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--brd)}
+.cbar{background:var(--card);padding:9px 16px;border-top:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--brd)}
 .cbar label{font-size:.72rem;font-weight:700;color:var(--gr);white-space:nowrap;font-family:'Anton',sans-serif;letter-spacing:.5px}
 .cbar select{flex:1;min-width:130px;padding:7px 10px;background:#fff;border:1px solid var(--brd);border-radius:8px;color:var(--txt);font-size:.85rem;outline:none;font-family:'Anton',sans-serif}
 .cbar select:focus{border-color:var(--Y)}
@@ -28,19 +28,21 @@ header{background:#080808;padding:8px 20px;display:flex;align-items:center;borde
 .cbtn-add{background:var(--Y);color:var(--N)}
 .cbtn-del{background:var(--CR);color:var(--gr);border:1px solid var(--brd)}
 
-/* NAV */
-nav{background:var(--N);display:flex;border-bottom:1px solid #000;overflow-x:auto;position:sticky;top:0;z-index:10}
-nav button{flex:1;padding:12px 4px;border:none;background:none;font-size:.72rem;font-weight:700;color:#666;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;min-width:68px;letter-spacing:1px;font-family:'Anton',sans-serif}
-nav button:hover{color:#aaa}
-nav button.active{color:var(--Y);background:none;border-bottom-color:var(--Y)}
+/* BOTTOM TAB BAR */
+nav{background:var(--card);display:flex;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:680px;z-index:20;border-top:1px solid var(--brd);box-shadow:0 -4px 20px rgba(0,0,0,.08);height:62px}
+nav button{flex:1;padding:8px 4px 6px;border:none;background:none;font-size:.58rem;font-weight:700;color:var(--gr);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;font-family:'Anton',sans-serif;letter-spacing:.5px}
+nav button svg{width:22px;height:22px;stroke:var(--gr);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+nav button:hover{color:var(--N)}
+nav button.active{color:var(--Y)}
+nav button.active svg{stroke:var(--Y)}
 
 /* PAGES */
-.page{display:none;padding:16px;max-width:680px;margin:0 auto;padding-bottom:70px}
+.page{display:none;padding:12px 14px;max-width:680px;margin:0 auto;padding-bottom:80px}
 .page.active{display:block}
 
 /* CARDS */
 .card{background:var(--card);border:none;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-.card-title{font-family:'Anton',sans-serif;font-size:1rem;color:var(--N);margin-bottom:14px;letter-spacing:1px;text-transform:uppercase;border-left:3px solid var(--Y);padding-left:10px}
+.card-title{font-family:'Anton',sans-serif;font-size:.95rem;color:var(--N);margin-bottom:14px;letter-spacing:1px;text-transform:uppercase}
 
 /* FORM */
 .lbl{font-size:.72rem;font-weight:700;color:var(--gr);display:block;margin-bottom:4px;margin-top:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'Anton',sans-serif}
@@ -69,7 +71,7 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .mbox.kcal .ml{color:#888}
 .mbox.prot{background:var(--P)}
 .mbox.prot .mv,.mbox.prot .ml{color:#fff}
-.mbox.carb{background:var(--PO)}
+.mbox.carb{background:var(--PO);opacity:.95}
 .mbox.carb .mv,.mbox.carb .ml{color:#fff}
 .mbox.fat{background:var(--AM)}
 .mbox.fat .mv,.mbox.fat .ml{color:#fff}
@@ -79,8 +81,8 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .ring-meta{flex:1}
 .prog-wrap{margin-bottom:11px}
 .prog-head{display:flex;justify-content:space-between;margin-bottom:5px}
-.prog-head span:first-child{font-weight:700;font-size:.83rem}
-.prog-head span:last-child{font-size:.72rem;color:var(--gr)}
+.prog-head span:first-child{font-weight:600;font-size:.82rem;color:var(--txt)}
+.prog-head span:last-child{font-size:.72rem;color:var(--gr);font-family:'Anton',sans-serif}
 .prog-track{height:7px;background:var(--brd);border-radius:99px;overflow:hidden}
 .prog-fill{height:100%;border-radius:99px;transition:width .45s ease}
 .pfy{background:var(--Y)}
@@ -107,21 +109,29 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .ms-badge{background:var(--CR);border:none;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:99px;color:var(--gr);white-space:nowrap}
 .ms-minibar{height:2px;background:var(--brd)}
 .ms-minifill{height:100%;background:var(--Y);transition:width .4s ease}
-.ms-body{padding:11px 15px}
+.ms-body{padding:10px 16px}
+.ms-sub{font-size:.68rem;color:var(--gr);margin-top:2px;letter-spacing:.3px}
+.ms-macrobar{height:4px;border-radius:99px;margin:0;overflow:hidden;display:flex}
+.ms-macrobar-f{background:var(--AM);height:100%}
+.ms-macrobar-c{background:var(--PO);height:100%}
+.ms-macrobar-p{background:var(--P);height:100%}
+.ms-macrobar-e{background:var(--brd);height:100%;flex:1}
+.ms-add-row{display:flex;justify-content:flex-end;padding:8px 0 2px}
+.ms-add-btn{background:var(--CR);color:var(--PO);border:none;border-radius:20px;padding:7px 16px;font-size:.75rem;font-weight:700;cursor:pointer;font-family:'Anton',sans-serif;letter-spacing:.5px;transition:background .2s}
+.ms-add-btn:hover{background:var(--brd)}
 
 /* FOOD ITEMS */
-.fi{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--brd)}
+.fi{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--brd)}
 .fi:last-child{border-bottom:none}
-.fi.off .fn,.fi.off .fm{opacity:.3}
-.fi.off .fk{opacity:.3}
-.fchk{width:22px;height:22px;border-radius:6px;border:2px solid var(--brd);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--N);transition:all .2s}
+.fi.off .fn,.fi.off .fm{opacity:.35}
+.fi.off .fk{opacity:.35}
+.fchk{width:24px;height:24px;border-radius:50%;border:2px solid var(--brd);background:transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.78rem;color:var(--N);transition:all .2s}
 .fchk.on{background:var(--Y);border-color:var(--Y)}
 .fdata{flex:1;min-width:0}
-.fn{font-size:.87rem;font-weight:700;color:var(--txt);margin-bottom:2px}
-.fg{color:var(--gr);font-weight:400;font-size:.78rem}
-.fm{font-size:.68rem;color:var(--gr)}
-.fm span{margin-right:7px}
-.fk{font-size:.88rem;font-weight:700;color:var(--PO);white-space:nowrap}
+.fn{font-size:.9rem;font-weight:700;color:var(--txt);margin-bottom:2px;font-family:'Anton',sans-serif;letter-spacing:.3px}
+.fg{color:var(--gr);font-weight:400;font-size:.77rem}
+.fm{display:none}
+.fk{font-size:.92rem;font-weight:700;color:var(--gr);white-space:nowrap;min-width:36px;text-align:right}
 .ftag{font-size:.6rem;background:rgba(172,126,185,.2);color:var(--P);padding:1px 6px;border-radius:99px;font-weight:700;margin-left:4px}
 
 /* SEARCH MODAL */
@@ -158,6 +168,20 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .alerta{background:var(--warn-bg);border:1px solid var(--warn-brd);border-radius:12px;padding:10px 14px;color:var(--warn-txt);font-size:.8rem;font-weight:700;margin-bottom:12px;display:none}
 .alerta.show{display:block}
 .tag-y{display:inline-block;background:rgba(245,197,24,.18);color:#7A5C00;border:none;font-size:.7rem;padding:4px 12px;border-radius:99px;font-weight:700}
+.budget-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.budget-title{font-family:'Anton',sans-serif;font-size:1.1rem;color:var(--N);letter-spacing:.5px}
+.budget-kcal{font-family:'Anton',sans-serif;font-size:.8rem;color:var(--gr);letter-spacing:.5px}
+.budget-ring-wrap{display:flex;align-items:center;gap:20px;margin-bottom:14px}
+.budget-stat{text-align:center;flex:1}
+.budget-stat-val{font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--N);line-height:1}
+.budget-stat-lbl{font-size:.65rem;color:var(--gr);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+.macro-dots{display:flex;gap:16px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.macro-dot{display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--gr)}
+.macro-dot-circle{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.macro-seg-bar{height:5px;border-radius:99px;overflow:hidden;display:flex;margin-top:10px}
+.macro-seg-f{height:100%;background:var(--AM)}
+.macro-seg-c{height:100%;background:var(--PO)}
+.macro-seg-p{height:100%;background:var(--P)}
 .tag-p{display:inline-block;background:rgba(172,126,185,.15);color:var(--PO);border:none;font-size:.7rem;padding:4px 12px;border-radius:99px;font-weight:700}
 .sect-label{font-family:'Anton',sans-serif;font-size:.82rem;color:var(--P);letter-spacing:2px;margin:18px 0 10px;text-transform:uppercase}
 .diff-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--brd);font-size:.85rem}
@@ -185,12 +209,24 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
   <button class="cbtn cbtn-del" onclick="borrarCliente()">✕</button>
 </div>
 
-<!-- NAV -->
+<!-- BOTTOM NAV -->
 <nav>
-  <button class="active" onclick="showPage('perfil',this)">PERFIL</button>
-  <button onclick="showPage('plan',this)">PLAN</button>
-  <button onclick="showPage('midia',this)">MI DÍA</button>
-  <button onclick="showPage('resumen',this)">RESUMEN</button>
+  <button class="active" onclick="showPage('perfil',this)">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    PERFIL
+  </button>
+  <button onclick="showPage('plan',this)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="4" x2="9" y2="9"/><line x1="15" y1="4" x2="15" y2="9"/></svg>
+    PLAN
+  </button>
+  <button onclick="showPage('midia',this)">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+    MI DÍA
+  </button>
+  <button onclick="showPage('resumen',this)">
+    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    RESUMEN
+  </button>
 </nav>
 
 <!-- ====== PERFIL ====== -->
@@ -259,34 +295,43 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
     <div class="empty"><p>Pide a tu nutricionista<br>que genere el plan primero.</p></div>
   </div>
   <div id="midia-wrap">
-    <!-- Ring + progress -->
-    <div class="card" style="padding:14px 16px">
-      <div style="display:flex;align-items:center;gap:16px">
+    <!-- Budget card -->
+    <div class="card" style="padding:18px 20px">
+      <div class="budget-header">
+        <div id="midia-dia-str" class="budget-title"></div>
+        <div id="midia-budget-lbl" class="budget-kcal"></div>
+      </div>
+      <div class="budget-ring-wrap">
+        <div class="budget-stat">
+          <div class="budget-stat-val" id="md-stat-eat">—</div>
+          <div class="budget-stat-lbl">Consumido</div>
+        </div>
         <div style="flex-shrink:0">
-          <svg id="kcal-ring" viewBox="0 0 100 100" width="90" height="90">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--brd)" stroke-width="10"/>
-            <circle id="ring-fill" cx="50" cy="50" r="42" fill="none" stroke="var(--Y)" stroke-width="10"
+          <svg id="kcal-ring" viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--brd)" stroke-width="8"/>
+            <circle id="ring-fill" cx="50" cy="50" r="42" fill="none" stroke="var(--Y)" stroke-width="8"
               stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="263.9"
               transform="rotate(-90 50 50)" style="transition:stroke-dashoffset .5s ease"/>
-            <text id="ring-val" x="50" y="46" text-anchor="middle" fill="var(--N)" font-family="Anton,sans-serif" font-size="15">0</text>
-            <text id="ring-meta" x="50" y="60" text-anchor="middle" fill="var(--gr)" font-size="7.5">/ — kcal</text>
+            <text id="ring-val" x="50" y="44" text-anchor="middle" fill="var(--N)" font-family="Anton,sans-serif" font-size="18" font-weight="bold">0</text>
+            <text x="50" y="58" text-anchor="middle" fill="var(--gr)" font-size="7">restante</text>
+            <text id="ring-meta" x="50" y="68" text-anchor="middle" fill="var(--gr)" font-size="7">— kcal</text>
           </svg>
         </div>
-        <div style="flex:1">
-          <div id="midia-dia-str" style="font-family:'Anton',sans-serif;font-size:.95rem;color:var(--N);letter-spacing:1px;margin-bottom:10px"></div>
-          <div class="prog-wrap" style="margin-bottom:8px">
-            <div class="prog-head"><span style="font-size:.75rem;color:var(--P)">PROTEÍNA</span><span id="md-txt-p">0/—g</span></div>
-            <div class="prog-track"><div class="prog-fill pfp" id="md-bar-p" style="width:0%"></div></div>
-          </div>
-          <div class="prog-wrap" style="margin-bottom:8px">
-            <div class="prog-head"><span style="font-size:.75rem;color:var(--PO)">CARBOS</span><span id="md-txt-c">0/—g</span></div>
-            <div class="prog-track"><div class="prog-fill pfv" id="md-bar-c" style="width:0%"></div></div>
-          </div>
-          <div class="prog-wrap" style="margin-bottom:0">
-            <div class="prog-head"><span style="font-size:.75rem;color:var(--AM)">GRASAS</span><span id="md-txt-f">0/—g</span></div>
-            <div class="prog-track"><div class="prog-fill pfa" id="md-bar-f" style="width:0%"></div></div>
-          </div>
+        <div class="budget-stat">
+          <div class="budget-stat-val" id="md-stat-budget">—</div>
+          <div class="budget-stat-lbl">Meta</div>
         </div>
+      </div>
+      <!-- Macro dots + segmented bar -->
+      <div class="macro-dots">
+        <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--AM)"></div><span id="md-dot-f">—% Grasas</span></div>
+        <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--PO)"></div><span id="md-dot-c">—% Carbos</span></div>
+        <div class="macro-dot"><div class="macro-dot-circle" style="background:var(--P)"></div><span id="md-dot-p">—% Prot</span></div>
+      </div>
+      <div class="macro-seg-bar" id="md-segbar">
+        <div class="macro-seg-f" id="md-seg-f" style="width:33%"></div>
+        <div class="macro-seg-c" id="md-seg-c" style="width:33%"></div>
+        <div class="macro-seg-p" id="md-seg-p" style="width:34%"></div>
       </div>
     </div>
     <div class="alerta" id="midia-alerta">¡Superaste tu meta calórica del día!</div>
@@ -777,7 +822,7 @@ function renderMiDia(){
   const pl=gPlanes()[CA];
   if(!pl||!pl[diaIdx(hoy())]){document.getElementById('midia-noplan').style.display='block';document.getElementById('midia-wrap').style.display='none';return;}
   document.getElementById('midia-noplan').style.display='none';document.getElementById('midia-wrap').style.display='block';
-  document.getElementById('midia-dia-str').textContent=DIAS[diaIdx(hoy())].toUpperCase()+' — '+fecStr(hoy());
+  const _h=hoy();document.getElementById('midia-dia-str').textContent=DIAS[diaIdx(_h)].toUpperCase()+', '+_h.slice(8)+'/'+_h.slice(5,7);
   const data=initTrackingHoy();
   renderMiDiaUI(data,c.macros);
 }
@@ -785,28 +830,44 @@ function renderMiDiaUI(data,mac){
   const tot=sumDay(data,true);
   // Ring
   const circ=263.9;const pct=mac.k>0?Math.min(tot.k/mac.k,1):0;
+  const remaining=mac.k-r0(tot.k);
   document.getElementById('ring-fill').style.strokeDashoffset=(circ*(1-pct)).toFixed(1);
   document.getElementById('ring-fill').style.stroke=tot.k>mac.k?'var(--AM)':'var(--Y)';
-  document.getElementById('ring-val').textContent=r0(tot.k);
-  document.getElementById('ring-meta').textContent='/ '+mac.k+' kcal';
-  setBar('md-bar-p','md-txt-p',tot.p,mac.p,'g','pfp');
-  setBar('md-bar-c','md-txt-c',tot.c,mac.c,'g','pfv');
-  setBar('md-bar-f','md-txt-f',tot.f,mac.f,'g','pfa');
+  document.getElementById('ring-val').textContent=Math.abs(remaining);
+  document.getElementById('ring-meta').textContent=(remaining<0?'excedido':'restante');
+  document.getElementById('md-stat-eat').textContent=r0(tot.k);
+  document.getElementById('md-stat-budget').textContent=mac.k;
+  document.getElementById('midia-budget-lbl').textContent='Meta: '+mac.k+' kcal';
+  // macro dots + segmented bar
+  const totK=tot.k||1;
+  const pctF=r0(tot.f*9/totK*100);const pctC=r0(tot.c*4/totK*100);const pctP=Math.max(0,100-pctF-pctC);
+  const el=id=>document.getElementById(id);
+  if(el('md-dot-f'))el('md-dot-f').textContent=pctF+'% Grasas';
+  if(el('md-dot-c'))el('md-dot-c').textContent=pctC+'% Carbos';
+  if(el('md-dot-p'))el('md-dot-p').textContent=pctP+'% Prot';
+  if(el('md-seg-f'))el('md-seg-f').style.width=pctF+'%';
+  if(el('md-seg-c'))el('md-seg-c').style.width=pctC+'%';
+  if(el('md-seg-p'))el('md-seg-p').style.width=pctP+'%';
+  // macro bars now in budget card
   document.getElementById('midia-alerta').classList.toggle('show',tot.k>mac.k);
   // Meals
   document.getElementById('midia-meals').innerHTML=MEALS.map(meal=>{
     const items=data[meal]||[];const ts=sum(items,true);
     const tgt=r0(mac.k*MC[meal].pct);const pct2=tgt?Math.min(ts.k/tgt*100,100):0;const over=ts.k>tgt;
+    const totK=ts.k||0;const pctF=totK?r0(ts.f*9/totK*100):0;const pctC=totK?r0(ts.c*4/totK*100):0;const pctP=totK?r0(ts.p*4/totK*100):100-pctF-pctC;
     return`<div class="ms">
       <div class="ms-head ${MC[meal].cl}">
-        <div><span class="ms-name ${MC[meal].cl}">${MC[meal].L}</span></div>
-        <span class="ms-badge" style="${over?'background:rgba(201,152,0,.15);color:var(--AM)':''}">${r0(ts.k)} / ${tgt} kcal</span>
+        <div>
+          <span class="ms-name ${MC[meal].cl}">${MC[meal].L}</span>
+          <div class="ms-sub">${r0(ts.k)} kcal · ${pctF}% grasa · ${pctC}% carbs · ${pctP}% prot</div>
+        </div>
+        <span class="ms-badge" style="${over?'background:rgba(201,152,0,.15);color:var(--AM)':''}">${r0(ts.k)} / ${tgt}</span>
       </div>
-      <div class="ms-minibar"><div class="ms-minifill" style="width:${pct2}%;${over?'background:var(--AM)':''}"></div></div>
+      <div class="ms-macrobar"><div class="ms-macrobar-f" style="width:${pctF}%"></div><div class="ms-macrobar-c" style="width:${pctC}%"></div><div class="ms-macrobar-p" style="width:${pctP}%"></div><div class="ms-macrobar-e"></div></div>
       <div class="ms-body">
         ${items.length?items.map((it,i)=>rowMiDia(meal,i,it)).join(''):'<p style="font-size:.8rem;color:var(--gr);padding:4px 0">Sin alimentos registrados.</p>'}
-        <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn btn-sm btn-p" style="flex:1;margin-top:0" onclick="abrirBusqueda('midia','${meal}')">BUSCAR ALIMENTO</button>
+        <div class="ms-add-row">
+          <button class="ms-add-btn" onclick="abrirBusqueda('midia','${meal}')">+ Agregar alimento</button>
         </div>
       </div>
     </div>`;
