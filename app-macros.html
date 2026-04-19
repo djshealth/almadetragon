@@ -1646,17 +1646,6 @@ const ALT_COMBOS={
     {name:'Opción Clásica',foods:[{cat:'🥩 Proteínas',min:1},{cat:'🌾 Cereales y Granos',min:1}]},
   ]
 };
-function mostrarAlternativas(meal){
-  const c=CA&&gClientes()[CA];if(!c?.macros)return;
-  ALT_MEAL=meal;
-  const tgtKcal=r0(c.macros.k*MC[meal].pct);
-  document.getElementById('alt-title').textContent='ALTERNATIVAS – '+MC[meal].L;
-  document.getElementById('alt-sub').textContent='4 opciones de ~'+tgtKcal+' kcal para esta comida';
-  // Generate 4 alternatives algorithmically from DB
-  const combos=generarAlternativas(meal,tgtKcal);
-  document.getElementById('alt-list').innerHTML=combos.map((combo,i)=>renderAltCard(combo,i,meal)).join('');
-  document.getElementById('alt-modal').classList.add('show');
-}
 function generarAlternativas(meal,tgtKcal){
   // Filter to healthy categories (no ultra-processed)
   const ultraCats=['🍔 Comida Rápida','🥤 Bebidas Procesadas','🍟 Snacks y Botanas','🍫 Dulces y Chocolates','🥐 Bollería Industrial','🌭 Embutidos y Carnes Procesadas','🍦 Helados','🥣 Cereales Industriales','🍜 Comidas Instantáneas','🧴 Salsas y Condimentos'];
@@ -1709,7 +1698,7 @@ function renderAltCard(combo,i,meal){
 }
 // Store generated combos to apply selected one
 let _lastAltCombos=[];
-function mostrarAlternativasActualizado(meal){
+function mostrarAlternativas(meal){
   const c=CA&&gClientes()[CA];if(!c?.macros)return;
   ALT_MEAL=meal;
   const tgtKcal=r0(c.macros.k*MC[meal].pct);
@@ -1719,9 +1708,6 @@ function mostrarAlternativasActualizado(meal){
   document.getElementById('alt-list').innerHTML=_lastAltCombos.map((combo,i)=>renderAltCard(combo,i,meal)).join('');
   document.getElementById('alt-modal').classList.add('show');
 }
-// Override the simple version with the complete one
-const _origMostrarAlt=mostrarAlternativas;
-function mostrarAlternativas(meal){return mostrarAlternativasActualizado(meal);}
 function aplicarAlternativa(idx){
   if(!ALT_MEAL||!_lastAltCombos[idx])return;
   const combo=_lastAltCombos[idx];
@@ -1877,18 +1863,17 @@ iniciarClientes();
 renderPlanSemanal();
 renderMiDia();
 renderResumen();
-// Show login if clients exist and multiple accounts
+// Show login only if current active client requires PIN
 setTimeout(()=>{
   const cs=gClientes();
   const ids=Object.keys(cs);
-  if(ids.length>1){
-    // Multiple clients: require login selection
-    mostrarLogin();
-  } else if(ids.length===1&&gClientes()[ids[0]].pin){
-    // Single client with PIN: require PIN
+  if(!ids.length)return; // No clients - normal flow
+  const activeC=cs[CA];
+  if(activeC&&activeC.pin){
+    // Active client has PIN - require it
     mostrarLogin();
   }
-  // else: no clients or single client without PIN = normal access
+  // Auto-login: if current CA has no PIN, just continue
 },100);
 </script>
 </body>
