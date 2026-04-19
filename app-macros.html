@@ -30,7 +30,7 @@ header{background:#080808;padding:6px 18px;display:flex;align-items:center;borde
 
 /* BOTTOM TAB BAR */
 nav{background:var(--card);display:flex;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:680px;z-index:20;border-top:1px solid var(--brd);box-shadow:0 -4px 20px rgba(0,0,0,.08);height:62px}
-nav button{flex:1;padding:8px 4px 6px;border:none;background:none;font-size:.58rem;font-weight:700;color:var(--gr);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;font-family:'Anton',sans-serif;letter-spacing:.5px}
+nav button{flex:1;padding:8px 2px 6px;border:none;background:none;font-size:.52rem;font-weight:700;color:var(--gr);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s;font-family:'Anton',sans-serif;letter-spacing:.5px}
 nav button svg{width:22px;height:22px;stroke:var(--gr);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
 nav button:hover{color:var(--N)}
 nav button.active{color:var(--Y)}
@@ -133,6 +133,75 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
 .fm{display:none}
 .fk{font-size:.92rem;font-weight:700;color:var(--gr);white-space:nowrap;min-width:36px;text-align:right}
 .ftag{font-size:.6rem;background:rgba(172,126,185,.2);color:var(--P);padding:1px 6px;border-radius:99px;font-weight:700;margin-left:4px}
+
+
+/* CALENDAR */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-month-lbl{font-family:'Anton',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--N);text-transform:uppercase}
+.cal-nav-btn{background:var(--CR);border:1px solid var(--brd);border-radius:10px;width:36px;height:36px;font-size:1rem;cursor:pointer;color:var(--N);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-dow{font-family:'Anton',sans-serif;font-size:.6rem;color:var(--gr);text-align:center;padding:4px 0;letter-spacing:.5px}
+.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:background .15s;position:relative;gap:3px}
+.cal-day:hover{background:var(--brd)}
+.cal-day.empty{cursor:default;pointer-events:none}
+.cal-day.today{background:var(--N)}
+.cal-day.today .cal-dn{color:var(--Y)}
+.cal-dn{font-family:'Anton',sans-serif;font-size:.85rem;color:var(--txt);line-height:1}
+.cal-day.other-month .cal-dn{color:var(--brd)}
+.cal-dot{width:6px;height:6px;border-radius:50%;background:var(--brd)}
+.cal-dot.tracked{background:var(--Y)}
+.cal-dot.closed{background:#4CAF50}
+.cal-day-closed{background:rgba(76,175,80,.12);border:1.5px solid rgba(76,175,80,.3)}
+.cal-day-tracked{background:rgba(245,197,24,.08);border:1.5px solid rgba(245,197,24,.25)}
+.cal-legend{display:flex;gap:14px;margin-top:14px;flex-wrap:wrap}
+.cal-legend-item{display:flex;align-items:center;gap:5px;font-size:.68rem;color:var(--gr);font-family:'Anton',sans-serif;letter-spacing:.3px}
+.cal-streak-card{background:var(--N);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.cal-streak-icon{font-size:2rem;line-height:1}
+.cal-streak-num{font-family:'Anton',sans-serif;font-size:2.2rem;color:var(--Y);line-height:1}
+.cal-streak-lbl{font-family:'Anton',sans-serif;font-size:.7rem;color:#888;letter-spacing:1px;text-transform:uppercase}
+.cal-streak-sub{font-size:.72rem;color:#aaa;margin-top:2px}
+/* ALTERNATIVES MODAL */
+.alt-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:110;align-items:flex-end}
+.alt-modal.show{display:flex}
+.alt-box{background:var(--CR);border-radius:22px 22px 0 0;width:100%;max-width:680px;margin:0 auto;max-height:80vh;overflow-y:auto;padding:20px 16px 32px}
+.alt-title{font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:2px;color:var(--N);text-transform:uppercase;margin-bottom:4px}
+.alt-sub{font-size:.75rem;color:var(--gr);margin-bottom:16px}
+.alt-close{float:right;background:var(--brd);border:none;width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:1rem;color:var(--txt)}
+.alt-card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);cursor:pointer;transition:box-shadow .2s}
+.alt-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.12)}
+.alt-card-title{font-family:'Anton',sans-serif;font-size:.8rem;letter-spacing:1px;color:var(--PO);text-transform:uppercase;margin-bottom:6px}
+.alt-foods{font-size:.8rem;color:var(--txt);line-height:1.6}
+.alt-macros{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.alt-macro-chip{font-size:.65rem;font-family:'Anton',sans-serif;padding:2px 8px;border-radius:99px;background:var(--CR);color:var(--gr);border:1px solid var(--brd)}
+.alt-macro-chip.k{background:var(--N);color:var(--Y);border-color:var(--N)}
+/* LOGIN SCREEN */
+.login-overlay{display:none;position:fixed;inset:0;background:#080808;z-index:999;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.login-overlay.show{display:flex}
+.login-logo{margin-bottom:28px;text-align:center}
+.login-logo img{height:60px}
+.login-title{font-family:'Anton',sans-serif;font-size:1.3rem;letter-spacing:3px;color:var(--Y);text-transform:uppercase;margin-bottom:4px;text-align:center}
+.login-sub{font-size:.8rem;color:#888;text-align:center;margin-bottom:32px}
+.login-clients{display:flex;flex-direction:column;gap:10px;width:100%;max-width:360px}
+.login-client-card{background:#1A1A1A;border:1px solid #333;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .2s}
+.login-client-card:hover{border-color:var(--Y)}
+.login-client-avatar{width:44px;height:44px;border-radius:50%;background:var(--PO);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:1.3rem;color:#fff;flex-shrink:0;overflow:hidden}
+.login-client-avatar img{width:100%;height:100%;object-fit:cover}
+.login-client-name{font-family:'Anton',sans-serif;font-size:.95rem;color:#fff;letter-spacing:.5px}
+.login-client-role{font-size:.68rem;color:#888;margin-top:1px}
+.login-pin-screen{display:none;flex-direction:column;align-items:center;width:100%;max-width:320px}
+.login-pin-screen.show{display:flex}
+.login-pin-name{font-family:'Anton',sans-serif;font-size:1rem;color:#fff;letter-spacing:1px;margin-bottom:20px;text-align:center}
+.login-pin-dots{display:flex;gap:12px;margin-bottom:28px}
+.pin-dot{width:16px;height:16px;border-radius:50%;border:2px solid #555;transition:background .15s}
+.pin-dot.filled{background:var(--Y);border-color:var(--Y)}
+.pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+.pin-key{background:#1A1A1A;border:1px solid #333;border-radius:14px;padding:18px;font-family:'Anton',sans-serif;font-size:1.2rem;color:#fff;cursor:pointer;text-align:center;transition:background .15s}
+.pin-key:hover{background:#2A2A2A}
+.pin-key.del{background:none;border-color:transparent;color:#888;font-size:.9rem}
+.pin-key.back-btn{background:none;border:1px solid #444;color:#888;font-size:.75rem;letter-spacing:.5px}
+.pin-error{color:#ff6b6b;font-size:.78rem;margin-top:8px;font-family:'Anton',sans-serif;letter-spacing:.5px;min-height:18px;text-align:center}
+.login-add-btn{background:none;border:1px dashed #444;border-radius:16px;padding:14px 16px;color:#666;font-family:'Anton',sans-serif;font-size:.82rem;letter-spacing:.5px;cursor:pointer;text-align:center;transition:border-color .2s;width:100%;max-width:360px;margin-top:4px}
+.login-add-btn:hover{border-color:var(--Y);color:var(--Y)}
 
 /* SEARCH MODAL */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;flex-direction:column}
@@ -273,6 +342,10 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
     <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
     RESUMEN
   </button>
+  <button onclick="showPage('calendario',this)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="4" x2="9" y2="9"/><line x1="15" y1="4" x2="15" y2="9"/><line x1="12" y1="13" x2="12" y2="17"/><line x1="10" y1="15" x2="14" y2="15"/></svg>
+    CAL
+  </button>
 </nav>
 
 <!-- ====== PERFIL ====== -->
@@ -303,6 +376,17 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
       <option value="mantener" selected>Mantener peso</option>
       <option value="ganar">Ganar músculo (superávit)</option>
     </select>
+    <div class="row2" style="margin-top:12px">
+      <div>
+        <label class="lbl">PIN de acceso (4 dígitos)</label>
+        <input type="password" id="p-pin" placeholder="••••" maxlength="4" inputmode="numeric" style="letter-spacing:6px;font-size:1.1rem">
+      </div>
+      <div>
+        <label class="lbl">Rol</label>
+        <select class="sel" id="p-rol"><option value="">Tragón</option><option value="admin">Admin</option></select>
+      </div>
+    </div>
+    <div style="font-size:.68rem;color:var(--gr);margin-top:4px;font-family:sans-serif;padding:0 2px">PIN opcional. Déjalo en blanco para acceso libre.</div>
     <button class="btn" onclick="calcularYGenerar()">CALCULAR Y GENERAR PLAN</button>
   </div>
   <div class="card" id="perfil-result" style="display:none">
@@ -457,6 +541,89 @@ input:focus,select.sel:focus{border-color:var(--Y);background:#fff}
   </div>
 </div>
 
+<!-- ====== CALENDARIO ====== -->
+<div id="page-calendario" class="page">
+  <div class="cal-streak-card" id="cal-streak-row">
+    <div class="cal-streak-icon" id="cal-fire-icon">○</div>
+    <div>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <div class="cal-streak-num" id="cal-streak-num">0</div>
+        <div class="cal-streak-lbl">días de racha</div>
+      </div>
+      <div class="cal-streak-sub" id="cal-streak-sub">Cierra el día para empezar tu racha</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cal-header">
+      <button class="cal-nav-btn" onclick="calNavMonth(-1)">&#8249;</button>
+      <div class="cal-month-lbl" id="cal-month-lbl">—</div>
+      <button class="cal-nav-btn" onclick="calNavMonth(1)">&#8250;</button>
+    </div>
+    <div class="cal-grid">
+      <div class="cal-dow">LUN</div>
+      <div class="cal-dow">MAR</div>
+      <div class="cal-dow">MIÉ</div>
+      <div class="cal-dow">JUE</div>
+      <div class="cal-dow">VIE</div>
+      <div class="cal-dow">SÁB</div>
+      <div class="cal-dow">DOM</div>
+    </div>
+    <div class="cal-grid" id="cal-days"></div>
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-dot closed"></div>Día cerrado</div>
+      <div class="cal-legend-item"><div class="cal-dot tracked"></div>Con registro</div>
+      <div class="cal-legend-item"><div class="cal-dot" style="border:1.5px solid var(--brd)"></div>Sin datos</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODAL ALTERNATIVAS ====== -->
+<div class="alt-modal" id="alt-modal">
+  <div class="alt-box">
+    <button class="alt-close" onclick="cerrarAlternativas()">✕</button>
+    <div class="alt-title" id="alt-title">ALTERNATIVAS</div>
+    <div class="alt-sub" id="alt-sub">4 opciones con las mismas calorías</div>
+    <div id="alt-list"></div>
+  </div>
+</div>
+
+<!-- ====== LOGIN OVERLAY ====== -->
+<div class="login-overlay" id="login-overlay">
+  <div class="login-logo">
+    <div style="font-family:'Anton',sans-serif;font-size:1.5rem;color:var(--Y);letter-spacing:3px">ALMA DE TRAGÓN</div>
+  </div>
+  <div class="login-title">BIENVENIDO</div>
+  <div class="login-sub" id="login-sub-text">Selecciona tu perfil</div>
+  <!-- Client list -->
+  <div class="login-clients" id="login-clients-list"></div>
+  <button class="login-add-btn" onclick="loginNuevoTragón()">+ Nuevo Tragón</button>
+  <!-- PIN screen (hidden by default) -->
+  <div class="login-pin-screen" id="login-pin-screen">
+    <div class="login-pin-name" id="login-pin-name"></div>
+    <div class="login-pin-dots" id="login-pin-dots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-keypad">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key back-btn" onclick="loginVolverClientes()">ATRÁS</button>
+      <button class="pin-key" onclick="pinKey('0')">0</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button>
+    </div>
+    <div class="pin-error" id="pin-error"></div>
+  </div>
+</div>
+
 <!-- ====== MODAL BUSCAR ALIMENTO ====== -->
 <div class="modal" id="modal-busqueda">
   <div class="modal-box">
@@ -568,6 +735,104 @@ const DB=[
   {id:'prot_bar', n:'Barra de proteína',      cat:'🍫 Otros', k:380, p:30,  c:40,  f:10},
   {id:'leche_alm',n:'Leche de almendra',      cat:'🍫 Otros', k:17,  p:0.6, c:1.5, f:1.1},
   {id:'cafe',     n:'Café negro',             cat:'🍫 Otros', k:2,   p:0.3, c:0,   f:0},
+  // 🍔 COMIDA RÁPIDA
+  {id:'big_mac',    n:'Big Mac (McDonald's)',        cat:'🍔 Comida Rápida', k:257, p:13,  c:24,  f:12},
+  {id:'mcnugget',   n:'McNuggets x6 (McDonald's)',   cat:'🍔 Comida Rápida', k:244, p:15,  c:15,  f:14},
+  {id:'fries_mc',   n:'Papas fritas McDonald's',     cat:'🍔 Comida Rápida', k:312, p:4,   c:40,  f:15},
+  {id:'whopper',    n:'Whopper Burger King',           cat:'🍔 Comida Rápida', k:256, p:12,  c:23,  f:13},
+  {id:'kfc_leg',    n:'Pieza KFC muslo',               cat:'🍔 Comida Rápida', k:327, p:16,  c:11,  f:23},
+  {id:'hotdog_c',   n:'Hot Dog con pan',               cat:'🍔 Comida Rápida', k:290, p:11,  c:26,  f:16},
+  {id:'pizza_pep',  n:'Pizza pepperoni (rebanada)',    cat:'🍔 Comida Rápida', k:272, p:12,  c:34,  f:10},
+  {id:'tacos_ca',   n:'Taco de carne de res',          cat:'🍔 Comida Rápida', k:218, p:12,  c:20,  f:9},
+  {id:'burrito_f',  n:'Burrito grande',                cat:'🍔 Comida Rápida', k:217, p:9,   c:28,  f:8},
+  {id:'onion_rng',  n:'Aros de cebolla fritos',        cat:'🍔 Comida Rápida', k:412, p:4,   c:48,  f:22},
+  {id:'corn_dog',   n:'Corn dog',                      cat:'🍔 Comida Rápida', k:280, p:9,   c:28,  f:15},
+  {id:'quesadilla', n:'Quesadilla de queso',            cat:'🍔 Comida Rápida', k:306, p:13,  c:27,  f:16},
+  // 🥤 BEBIDAS PROCESADAS
+  {id:'coca_cola',  n:'Coca-Cola regular',             cat:'🥤 Bebidas Procesadas', k:42,  p:0,   c:11,  f:0},
+  {id:'pepsi_reg',  n:'Pepsi regular',                 cat:'🥤 Bebidas Procesadas', k:41,  p:0,   c:11,  f:0},
+  {id:'sprite_r',   n:'Sprite',                        cat:'🥤 Bebidas Procesadas', k:41,  p:0,   c:10,  f:0},
+  {id:'red_bull',   n:'Red Bull (250ml)',              cat:'🥤 Bebidas Procesadas', k:45,  p:0.4, c:11,  f:0},
+  {id:'monster_e',  n:'Monster Energy',                cat:'🥤 Bebidas Procesadas', k:47,  p:0,   c:11,  f:0},
+  {id:'gatorade',   n:'Gatorade',                      cat:'🥤 Bebidas Procesadas', k:26,  p:0,   c:7,   f:0},
+  {id:'leche_choc', n:'Leche chocolatada',             cat:'🥤 Bebidas Procesadas', k:83,  p:3.4, c:11,  f:2.7},
+  {id:'nestea_i',   n:'Nestea té frío',                cat:'🥤 Bebidas Procesadas', k:36,  p:0,   c:9,   f:0},
+  {id:'agua_vita',  n:'Agua vitaminada Powerade',      cat:'🥤 Bebidas Procesadas', k:24,  p:0,   c:6,   f:0},
+  {id:'yakult',     n:'Yakult',                        cat:'🥤 Bebidas Procesadas', k:70,  p:1.2, c:15,  f:0},
+  // 🍟 SNACKS Y BOTANAS
+  {id:'doritos',    n:'Doritos Nacho',                 cat:'🍟 Snacks y Botanas', k:490, p:7,   c:63,  f:23},
+  {id:'lays_or',    n:'Lay's Original',               cat:'🍟 Snacks y Botanas', k:536, p:7,   c:55,  f:33},
+  {id:'cheetos_c',  n:'Cheetos crujientes',            cat:'🍟 Snacks y Botanas', k:558, p:7,   c:57,  f:34},
+  {id:'pringles',   n:'Pringles original',             cat:'🍟 Snacks y Botanas', k:536, p:5,   c:55,  f:34},
+  {id:'popcorn_b',  n:'Palomitas de bolsa',            cat:'🍟 Snacks y Botanas', k:375, p:7,   c:74,  f:4},
+  {id:'fritos',     n:'Fritos maíz',                   cat:'🍟 Snacks y Botanas', k:571, p:6,   c:57,  f:36},
+  {id:'ritz_cr',    n:'Galletas Ritz',                 cat:'🍟 Snacks y Botanas', k:504, p:7,   c:64,  f:23},
+  {id:'pretzel',    n:'Pretzels salados',              cat:'🍟 Snacks y Botanas', k:380, p:9,   c:80,  f:3},
+  {id:'nachos_s',   n:'Nachos tortilla chip',          cat:'🍟 Snacks y Botanas', k:496, p:6,   c:63,  f:25},
+  {id:'cracker_g',  n:'Galleta Graham',                cat:'🍟 Snacks y Botanas', k:432, p:7,   c:72,  f:14},
+  {id:'ricecrk',    n:'Rice Krispies Treats',          cat:'🍟 Snacks y Botanas', k:400, p:3,   c:68,  f:13},
+  // 🍫 DULCES Y CHOCOLATES
+  {id:'snickers',   n:'Snickers barra',                cat:'🍫 Dulces y Chocolates', k:488, p:8,   c:58,  f:25},
+  {id:'twix',       n:'Twix',                          cat:'🍫 Dulces y Chocolates', k:495, p:5,   c:62,  f:25},
+  {id:'kitkat',     n:'Kit Kat',                       cat:'🍫 Dulces y Chocolates', k:518, p:7,   c:60,  f:27},
+  {id:'reeses',     n:'Reese's Peanut Butter',        cat:'🍫 Dulces y Chocolates', k:527, p:12,  c:52,  f:31},
+  {id:'milkyway',   n:'Milky Way',                     cat:'🍫 Dulces y Chocolates', k:452, p:4,   c:69,  f:18},
+  {id:'mm_choco',   n:'M&Ms chocolate',                cat:'🍫 Dulces y Chocolates', k:491, p:5,   c:67,  f:21},
+  {id:'gummy_b',    n:'Ositos de gomita',              cat:'🍫 Dulces y Chocolates', k:325, p:6,   c:77,  f:0},
+  {id:'skittles',   n:'Skittles',                      cat:'🍫 Dulces y Chocolates', k:396, p:0,   c:91,  f:4},
+  {id:'hershey',    n:'Hershey's Milk Chocolate',     cat:'🍫 Dulces y Chocolates', k:535, p:8,   c:58,  f:31},
+  {id:'ferrero',    n:'Ferrero Rocher',                cat:'🍫 Dulces y Chocolates', k:573, p:8,   c:47,  f:40},
+  {id:'bounty',     n:'Bounty (coco-chocolate)',        cat:'🍫 Dulces y Chocolates', k:471, p:4,   c:56,  f:25},
+  // 🍩 PANADERÍA INDUSTRIAL
+  {id:'donut_gl',   n:'Dona glaseada',                 cat:'🍩 Panadería Industrial', k:381, p:5,   c:50,  f:18},
+  {id:'muffin_bl',  n:'Muffin blueberry industrial',   cat:'🍩 Panadería Industrial', k:377, p:5,   c:55,  f:16},
+  {id:'cinnroll',   n:'Rollo de canela',               cat:'🍩 Panadería Industrial', k:375, p:6,   c:55,  f:15},
+  {id:'croissant_i',n:'Croissant industrial',          cat:'🍩 Panadería Industrial', k:406, p:8,   c:45,  f:21},
+  {id:'poptart',    n:'Pop-Tart',                      cat:'🍩 Panadería Industrial', k:382, p:4,   c:66,  f:11},
+  {id:'brownie_p',  n:'Brownie empaquetado',           cat:'🍩 Panadería Industrial', k:420, p:4,   c:54,  f:21},
+  {id:'pan_bimbo',  n:'Pan Bimbo blanco (rebanada)',   cat:'🍩 Panadería Industrial', k:266, p:9,   c:50,  f:3},
+  {id:'magdalena',  n:'Magdalena / mantecada',         cat:'🍩 Panadería Industrial', k:395, p:5,   c:53,  f:18},
+  {id:'gansito',    n:'Gansito (Marinela)',            cat:'🍩 Panadería Industrial', k:415, p:6,   c:60,  f:18},
+  {id:'pingüino',   n:'Pingüino de chocolate',         cat:'🍩 Panadería Industrial', k:430, p:5,   c:58,  f:21},
+  // 🌭 CARNES PROCESADAS
+  {id:'bologna',    n:'Mortadela / Bologna',           cat:'🌭 Carnes Procesadas', k:310, p:11,  c:4,   f:27},
+  {id:'salami_p',   n:'Salami',                        cat:'🌭 Carnes Procesadas', k:400, p:22,  c:2,   f:34},
+  {id:'pepperoni_s',n:'Pepperoni',                     cat:'🌭 Carnes Procesadas', k:494, p:20,  c:2,   f:45},
+  {id:'frank_s',    n:'Salchicha Frankfurt',            cat:'🌭 Carnes Procesadas', k:301, p:11,  c:2,   f:28},
+  {id:'jam_deli',   n:'Jamón tipo deli',               cat:'🌭 Carnes Procesadas', k:145, p:16,  c:3,   f:8},
+  {id:'tocino',     n:'Tocino / Bacon cocido',         cat:'🌭 Carnes Procesadas', k:541, p:37,  c:1,   f:42},
+  {id:'chorizo_m',  n:'Chorizo mexicano',              cat:'🌭 Carnes Procesadas', k:455, p:16,  c:4,   f:42},
+  {id:'surimi',     n:'Surimi palitos cangrejo',       cat:'🌭 Carnes Procesadas', k:99,  p:8,   c:14,  f:1},
+  {id:'spam',       n:'Spam enlatado',                 cat:'🌭 Carnes Procesadas', k:271, p:13,  c:3,   f:23},
+  // 🍦 HELADOS Y POSTRES
+  {id:'icecream_v', n:'Helado vainilla',               cat:'🍦 Helados y Postres', k:207, p:3.5, c:24,  f:11},
+  {id:'icecream_ch',n:'Helado chocolate',              cat:'🍦 Helados y Postres', k:216, p:3.8, c:26,  f:11},
+  {id:'fro_yo',     n:'Frozen yogurt',                 cat:'🍦 Helados y Postres', k:127, p:3,   c:22,  f:3},
+  {id:'cheesecake', n:'Cheesecake (porción)',           cat:'🍦 Helados y Postres', k:321, p:5,   c:26,  f:22},
+  {id:'flan_v',     n:'Flan de vainilla',              cat:'🍦 Helados y Postres', k:130, p:4,   c:20,  f:4},
+  {id:'tres_lech',  n:'Pastel tres leches',            cat:'🍦 Helados y Postres', k:295, p:6,   c:36,  f:14},
+  {id:'churros',    n:'Churros con azúcar',            cat:'🍦 Helados y Postres', k:358, p:5,   c:55,  f:13},
+  // 🥣 CEREALES INDUSTRIALES
+  {id:'frosted_fl', n:'Frosted Flakes Kellogg's',     cat:'🥣 Cereales Industriales', k:378, p:5,   c:88,  f:1},
+  {id:'lucky_ch',   n:'Lucky Charms',                  cat:'🥣 Cereales Industriales', k:374, p:8,   c:80,  f:4},
+  {id:'cocoa_puf',  n:'Cocoa Puffs',                   cat:'🥣 Cereales Industriales', k:376, p:7,   c:80,  f:4},
+  {id:'choco_krs',  n:'Choco Krispis',                 cat:'🥣 Cereales Industriales', k:370, p:5,   c:82,  f:2},
+  {id:'granola_b',  n:'Barra de granola',              cat:'🥣 Cereales Industriales', k:408, p:8,   c:64,  f:15},
+  {id:'nutella_tb', n:'Nutella (por cucharada)',        cat:'🥣 Cereales Industriales', k:539, p:6,   c:57,  f:31},
+  {id:'pbj_sand',   n:'Sándwich mantequilla maní + mermelada', cat:'🥣 Cereales Industriales', k:280, p:9, c:38, f:10},
+  // 🍝 COMIDAS INSTANTÁNEAS
+  {id:'ramen_ins',  n:'Ramen instantáneo (paquete)',   cat:'🍝 Comidas Instantáneas', k:436, p:9,   c:63,  f:17},
+  {id:'mac_cheese', n:'Mac & Cheese Kraft',            cat:'🍝 Comidas Instantáneas', k:361, p:12,  c:56,  f:10},
+  {id:'pizza_froz', n:'Pizza congelada (porción)',     cat:'🍝 Comidas Instantáneas', k:268, p:11,  c:34,  f:10},
+  {id:'burrit_frz', n:'Burrito congelado',             cat:'🍝 Comidas Instantáneas', k:237, p:9,   c:34,  f:7},
+  {id:'caldo_kn',   n:'Caldo de pollo Knorr (1 cubo)' ,cat:'🍝 Comidas Instantáneas', k:300, p:8,   c:28,  f:18},
+  // 🧂 SALSAS Y CONDIMENTOS
+  {id:'ketchup',    n:'Ketchup Heinz',                 cat:'🧂 Salsas y Condimentos', k:112, p:1.5, c:27,  f:0.1},
+  {id:'mayo_com',   n:'Mayonesa comercial',            cat:'🧂 Salsas y Condimentos', k:680, p:1,   c:2,   f:75},
+  {id:'ranch_dr',   n:'Aderezo Ranch',                 cat:'🧂 Salsas y Condimentos', k:486, p:1.5, c:7,   f:50},
+  {id:'bbq_sauce',  n:'Salsa BBQ',                     cat:'🧂 Salsas y Condimentos', k:172, p:0.9, c:41,  f:0.5},
+  {id:'hot_val',    n:'Salsa Valentina picante',       cat:'🧂 Salsas y Condimentos', k:24,  p:1.3, c:4,   f:0.5},
+  {id:'thousand_i', n:'Aderezo Thousand Island',       cat:'🧂 Salsas y Condimentos', k:387, p:0.9, c:14,  f:38},
   {id:'proteina', n:'Proteína whey chocolate',cat:'🍫 Otros', k:390, p:75,  c:10,  f:7},
 ];
 
@@ -738,6 +1003,8 @@ function cargarPerfil(){
   if(!CA){limpiarPerfil();return;}
   const c=gClientes()[CA]||{};
   document.getElementById('p-nombre').value=c.nombre||'';
+  if(document.getElementById('p-pin'))document.getElementById('p-pin').value='';
+  if(document.getElementById('p-rol'))document.getElementById('p-rol').value=c.esAdmin?'admin':'';
   document.getElementById('p-edad').value=c.edad||'';
   document.getElementById('p-sexo').value=c.sexo||'h';
   document.getElementById('p-peso').value=c.peso||'';
@@ -762,6 +1029,9 @@ function calcularYGenerar(){
   const altura=parseFloat(document.getElementById('p-altura').value);
   const act=parseFloat(document.getElementById('p-act').value);
   const obj=document.getElementById('p-obj').value;
+  const pinInput=(document.getElementById('p-pin')?.value||'').trim();
+  const pin=pinInput.length===4?pinInput:null;
+  const esAdmin=document.getElementById('p-rol')?.value==='admin';
   if(!nombre||isNaN(edad)||isNaN(peso)||isNaN(altura)){alert('Completa todos los campos.');return;}
   const bmr=10*peso+6.25*altura-5*edad+(sexo==='h'?5:-161);
   const tdee=bmr*act;
@@ -772,7 +1042,7 @@ function calcularYGenerar(){
   const macros={k:kcal,p:prot,c:carb,f:fat};
   const cs=gClientes();
   if(!cs[CA])cs[CA]={};
-  Object.assign(cs[CA],{nombre,edad,sexo,peso,altura,actividad:act,objetivo:obj,macros});
+  Object.assign(cs[CA],{nombre,edad,sexo,peso,altura,actividad:act,objetivo:obj,macros,pin,esAdmin});
   sClientes(cs);
   // Actualizar nombre en select
   const sel=document.getElementById('clienteSelect');
@@ -1024,7 +1294,8 @@ function renderMiDiaUI(data,mac){
       <div class="ms-macrobar"><div class="ms-macrobar-f" style="width:${pctF}%"></div><div class="ms-macrobar-c" style="width:${pctC}%"></div><div class="ms-macrobar-p" style="width:${pctP}%"></div><div class="ms-macrobar-e"></div></div>
       <div class="ms-body">
         ${items.length?items.map((it,i)=>rowMiDia(meal,i,it)).join(''):'<p style="font-size:.8rem;color:var(--gr);padding:4px 0">Sin alimentos registrados.</p>'}
-        <div class="ms-add-row">
+        <div class="ms-add-row" style="gap:8px">
+          <button class="ms-add-btn" style="background:rgba(172,126,185,.15);color:var(--PO)" onclick="mostrarAlternativas('${meal}')">Alternativa</button>
           <button class="ms-add-btn" onclick="abrirBusqueda('midia','${meal}')">+ Agregar alimento</button>
         </div>
       </div>
@@ -1291,6 +1562,299 @@ function setBar(barId,txtId,val,meta,unit,cls){
   const te=document.getElementById(txtId);if(te)te.textContent=`${r1(val)} / ${meta} ${unit}`;
 }
 
+
+/* ============================================================
+   CALENDARIO
+============================================================ */
+let CALVIEW={year:new Date().getFullYear(),month:new Date().getMonth()};
+const MESES=['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+
+function renderCalendario(){
+  if(!CA){
+    document.getElementById('cal-days').innerHTML='<p style="grid-column:span 7;padding:20px;text-align:center;font-size:.85rem;color:var(--gr)">Selecciona un Tragón primero.</p>';
+    return;
+  }
+  // Streak row
+  const streak=calcStreakCount();
+  document.getElementById('cal-streak-num').textContent=streak;
+  document.getElementById('cal-fire-icon').textContent=streak>0?'🔥':'○';
+  const s=gStreak();
+  const isClosed=s.closedDates&&s.closedDates.includes(hoy());
+  document.getElementById('cal-streak-sub').textContent=streak===0?'Cierra el día para empezar tu racha':isClosed?'¡Sigue así, Tragón!':'Cierra hoy para mantener tu racha';
+  // Month label
+  const {year,month}=CALVIEW;
+  document.getElementById('cal-month-lbl').textContent=MESES[month]+' '+year;
+  // Build days
+  const closed=new Set((gStreak().closedDates)||[]);
+  const trackData=gTracking()[CA]||{};
+  // First day of month (0=Sun)
+  const firstDay=new Date(year,month,1).getDay();
+  // Convert: our grid starts Monday. Sun=0 → 6, Mon=1→0, ...
+  const startOffset=firstDay===0?6:firstDay-1;
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  const todayStr=hoy();
+  let cells='';
+  // Empty cells before
+  for(let i=0;i<startOffset;i++)cells+=`<div class="cal-day empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday=ds===todayStr;
+    const isClosed2=closed.has(ds);
+    const tracking=trackData[ds];
+    const hasFood=tracking&&MEALS.some(m=>(tracking[m]||[]).length>0);
+    let cls='cal-day';
+    if(isToday)cls+=' today';
+    else if(isClosed2)cls+=' cal-day-closed';
+    else if(hasFood)cls+=' cal-day-tracked';
+    const dotCls=isClosed2?'closed':hasFood?'tracked':'';
+    // Don't allow future dates
+    const isFuture=ds>todayStr;
+    const clickFn=!isFuture?`onclick="irADia('${ds}')"`:''
+    cells+=`<div class="${cls}" ${clickFn} title="${ds}">
+      <span class="cal-dn">${d}</span>
+      ${!isToday?`<div class="cal-dot ${dotCls}" style="${isFuture&&!dotCls?'opacity:.3':''}"></div>`:''}
+    </div>`;
+  }
+  document.getElementById('cal-days').innerHTML=cells;
+}
+function calNavMonth(dir){
+  CALVIEW.month+=dir;
+  if(CALVIEW.month<0){CALVIEW.month=11;CALVIEW.year--;}
+  if(CALVIEW.month>11){CALVIEW.month=0;CALVIEW.year++;}
+  renderCalendario();
+}
+function irADia(dateStr){
+  CDATE=dateStr;
+  const navBtns=document.querySelectorAll('nav button');
+  navBtns.forEach(b=>b.classList.remove('active'));
+  // Mi Día is index 2
+  navBtns[2].classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-midia').classList.add('active');
+  renderMiDia();
+}
+
+/* ============================================================
+   ALTERNATIVAS DE COMIDA
+============================================================ */
+let ALT_MEAL=null;
+const ALT_COMBOS={
+  desayuno:[
+    {name:'Opción Proteica',foods:[{cat:'🥚 Huevos y Lácteos',min:1},{cat:'🌾 Cereales y Granos',min:1}]},
+    {name:'Opción Verde',foods:[{cat:'🍳 Breakfast',min:1},{cat:'🥛 Lácteos',min:1}]},
+    {name:'Opción Express',foods:[{cat:'🌾 Cereales y Granos',min:2}]},
+    {name:'Opción Clásica',foods:[{cat:'🥩 Proteínas',min:1},{cat:'🌾 Cereales y Granos',min:1}]},
+  ]
+};
+function mostrarAlternativas(meal){
+  const c=CA&&gClientes()[CA];if(!c?.macros)return;
+  ALT_MEAL=meal;
+  const tgtKcal=r0(c.macros.k*MC[meal].pct);
+  document.getElementById('alt-title').textContent='ALTERNATIVAS – '+MC[meal].L;
+  document.getElementById('alt-sub').textContent='4 opciones de ~'+tgtKcal+' kcal para esta comida';
+  // Generate 4 alternatives algorithmically from DB
+  const combos=generarAlternativas(meal,tgtKcal);
+  document.getElementById('alt-list').innerHTML=combos.map((combo,i)=>renderAltCard(combo,i,meal)).join('');
+  document.getElementById('alt-modal').classList.add('show');
+}
+function generarAlternativas(meal,tgtKcal){
+  // Filter to healthy categories (no ultra-processed)
+  const ultraCats=['🍔 Comida Rápida','🥤 Bebidas Procesadas','🍟 Snacks y Botanas','🍫 Dulces y Chocolates','🥐 Bollería Industrial','🌭 Embutidos y Carnes Procesadas','🍦 Helados','🥣 Cereales Industriales','🍜 Comidas Instantáneas','🧴 Salsas y Condimentos'];
+  const healthy=DB.filter(f=>!ultraCats.includes(f.cat));
+  // 4 different strategic combos
+  const strategies=[
+    // High protein
+    {name:'Alta proteína',filter:f=>f.p>15,weight:'p'},
+    // Balanced macros
+    {name:'Balanceado',filter:f=>f.k>50&&f.k<400,weight:'balanced'},
+    // Mostly carbs (energy)
+    {name:'Energético',filter:f=>f.c>20,weight:'c'},
+    // Light / low cal
+    {name:'Ligero',filter:f=>f.k<200&&f.k>30,weight:'light'},
+  ];
+  return strategies.map(strat=>{
+    let pool=healthy.filter(strat.filter);
+    if(pool.length<2)pool=healthy;
+    // Shuffle pool differently per strategy
+    const shuffled=[...pool].sort(()=>Math.random()-.5);
+    // Pick 2-3 foods that sum close to tgtKcal
+    let selected=[];let kcalLeft=tgtKcal;
+    for(let i=0;i<shuffled.length&&selected.length<3&&kcalLeft>30;i++){
+      const f=shuffled[i];
+      const gNeeded=Math.min(200,Math.max(30,r0(kcalLeft/f.k*100)));
+      if(gNeeded<20)continue;
+      const contrib=calc(f,gNeeded);
+      selected.push({food:f,g:gNeeded,...contrib});
+      kcalLeft-=contrib.k;
+    }
+    const totK=selected.reduce((a,x)=>a+x.k,0);
+    const totP=selected.reduce((a,x)=>a+x.p,0);
+    const totC=selected.reduce((a,x)=>a+x.c,0);
+    const totF=selected.reduce((a,x)=>a+x.f,0);
+    return{name:strat.name,foods:selected,k:totK,p:totP,c:totC,f:totF};
+  });
+}
+function renderAltCard(combo,i,meal){
+  const foodLines=combo.foods.map(x=>`${esc(x.food.n)} <span style="color:var(--gr)">${x.g}g – ${x.k}kcal</span>`).join('<br>');
+  return`<div class="alt-card" onclick="aplicarAlternativa(${i})">
+    <div class="alt-card-title">Opción ${i+1}: ${esc(combo.name)}</div>
+    <div class="alt-foods">${foodLines}</div>
+    <div class="alt-macros">
+      <span class="alt-macro-chip k">${r0(combo.k)} kcal</span>
+      <span class="alt-macro-chip">P ${r1(combo.p)}g</span>
+      <span class="alt-macro-chip">C ${r1(combo.c)}g</span>
+      <span class="alt-macro-chip">G ${r1(combo.f)}g</span>
+    </div>
+  </div>`;
+}
+// Store generated combos to apply selected one
+let _lastAltCombos=[];
+function mostrarAlternativasActualizado(meal){
+  const c=CA&&gClientes()[CA];if(!c?.macros)return;
+  ALT_MEAL=meal;
+  const tgtKcal=r0(c.macros.k*MC[meal].pct);
+  _lastAltCombos=generarAlternativas(meal,tgtKcal);
+  document.getElementById('alt-title').textContent='ALTERNATIVAS – '+MC[meal].L;
+  document.getElementById('alt-sub').textContent='4 opciones de ~'+tgtKcal+' kcal para esta comida';
+  document.getElementById('alt-list').innerHTML=_lastAltCombos.map((combo,i)=>renderAltCard(combo,i,meal)).join('');
+  document.getElementById('alt-modal').classList.add('show');
+}
+// Override the simple version with the complete one
+const _origMostrarAlt=mostrarAlternativas;
+function mostrarAlternativas(meal){return mostrarAlternativasActualizado(meal);}
+function aplicarAlternativa(idx){
+  if(!ALT_MEAL||!_lastAltCombos[idx])return;
+  const combo=_lastAltCombos[idx];
+  const fecha=getCDATE();
+  const data=getTrackingFecha(fecha);
+  // Replace meal content with alternative foods
+  data[ALT_MEAL]=combo.foods.map(x=>({
+    nombre:x.food.n,g:x.g,k:x.k,p:x.p,c:x.c,f:x.f,checked:true
+  }));
+  saveTrackingFecha(fecha,data);
+  cerrarAlternativas();
+  renderMiDiaUI(data,gClientes()[CA].macros);
+}
+function cerrarAlternativas(){
+  document.getElementById('alt-modal').classList.remove('show');
+  ALT_MEAL=null;
+}
+
+/* ============================================================
+   CUENTAS DE USUARIO (PIN local)
+============================================================ */
+let LOGIN_CA=null; // temp selected client before PIN
+let PIN_BUFFER='';
+
+function mostrarLogin(){
+  if(!Object.keys(gClientes()).length){
+    // No clients yet - go straight to perfil
+    ocultarLogin();return;
+  }
+  renderLoginClients();
+  document.getElementById('login-overlay').classList.add('show');
+}
+function ocultarLogin(){
+  document.getElementById('login-overlay').classList.remove('show');
+}
+function renderLoginClients(){
+  const cs=gClientes();
+  const ids=Object.keys(cs);
+  let html='';
+  for(const id of ids){
+    const c=cs[id];
+    const initials=(c.nombre||'?').split(' ').map(w=>w[0]||'').join('').slice(0,2).toUpperCase();
+    const avatarHtml=c.foto?`<img src="${c.foto}" alt="">`:`${initials}`;
+    const roleLbl=c.esAdmin?'Administrador':'Tragón';
+    html+=`<div class="login-client-card" onclick="loginSeleccionarCliente('${id}')">
+      <div class="login-client-avatar">${avatarHtml}</div>
+      <div>
+        <div class="login-client-name">${esc(c.nombre||'Sin nombre')}</div>
+        <div class="login-client-role">${roleLbl}</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('login-clients-list').innerHTML=html;
+  // Show client list, hide PIN
+  document.getElementById('login-clients-list').style.display='flex';
+  document.querySelector('.login-add-btn').style.display='block';
+  document.getElementById('login-pin-screen').classList.remove('show');
+}
+function loginSeleccionarCliente(id){
+  const c=gClientes()[id];if(!c)return;
+  LOGIN_CA=id;
+  // If client has a PIN, show PIN screen
+  if(c.pin){
+    PIN_BUFFER='';
+    updatePinDots();
+    document.getElementById('login-pin-name').textContent=c.nombre||'—';
+    document.getElementById('pin-error').textContent='';
+    document.getElementById('login-clients-list').style.display='none';
+    document.querySelector('.login-add-btn').style.display='none';
+    document.getElementById('login-pin-screen').classList.add('show');
+  } else {
+    // No PIN - direct login
+    loginEntrar(id);
+  }
+}
+function loginVolverClientes(){
+  LOGIN_CA=null;PIN_BUFFER='';
+  renderLoginClients();
+}
+function loginNuevoTragón(){
+  ocultarLogin();
+  // Go to perfil page to create new client
+  document.querySelectorAll('nav button').forEach((b,i)=>{b.classList.remove('active');if(i===0)b.classList.add('active');});
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-perfil').classList.add('active');
+}
+function pinKey(digit){
+  if(PIN_BUFFER.length>=4)return;
+  PIN_BUFFER+=digit;
+  updatePinDots();
+  if(PIN_BUFFER.length===4)setTimeout(verificarPIN,300);
+}
+function pinDel(){
+  PIN_BUFFER=PIN_BUFFER.slice(0,-1);
+  updatePinDots();
+  document.getElementById('pin-error').textContent='';
+}
+function updatePinDots(){
+  for(let i=0;i<4;i++){
+    document.getElementById('pd'+i).classList.toggle('filled',i<PIN_BUFFER.length);
+  }
+}
+function verificarPIN(){
+  const c=gClientes()[LOGIN_CA];
+  if(!c)return;
+  if(PIN_BUFFER===c.pin){
+    loginEntrar(LOGIN_CA);
+  } else {
+    PIN_BUFFER='';updatePinDots();
+    document.getElementById('pin-error').textContent='PIN incorrecto. Inténtalo de nuevo.';
+  }
+}
+function loginEntrar(id){
+  CA=id;
+  ocultarLogin();
+  // Sync cbar select
+  const sel=document.getElementById('clienteSelect');
+  if(sel){for(const o of sel.options)if(o.value===CA){sel.value=CA;break;}}
+  // Initialize tracking and render
+  initTrackingFecha(hoy());
+  renderMiDia();renderResumen();renderPlanSemanal();
+  // Navigate to Mi Día
+  document.querySelectorAll('nav button').forEach((b,i)=>{b.classList.remove('active');if(i===2)b.classList.add('active');});
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-midia').classList.add('active');
+}
+function guardarPIN(clienteId,pin){
+  const cs=gClientes();
+  if(!cs[clienteId])return;
+  cs[clienteId].pin=pin||null;
+  sClientes(cs);
+}
+
 /* ============================================================
    NAVEGACIÓN
 ============================================================ */
@@ -1303,6 +1867,7 @@ function showPage(id,btn){
   if(id==='plan')renderPlanSemanal();
   if(id==='midia')renderMiDia();
   if(id==='resumen')renderResumen();
+  if(id==='calendario'){CALVIEW={year:new Date().getFullYear(),month:new Date().getMonth()};renderCalendario();}
 }
 
 /* ============================================================
@@ -1312,6 +1877,19 @@ iniciarClientes();
 renderPlanSemanal();
 renderMiDia();
 renderResumen();
+// Show login if clients exist and multiple accounts
+setTimeout(()=>{
+  const cs=gClientes();
+  const ids=Object.keys(cs);
+  if(ids.length>1){
+    // Multiple clients: require login selection
+    mostrarLogin();
+  } else if(ids.length===1&&gClientes()[ids[0]].pin){
+    // Single client with PIN: require PIN
+    mostrarLogin();
+  }
+  // else: no clients or single client without PIN = normal access
+},100);
 </script>
 </body>
 </html>
